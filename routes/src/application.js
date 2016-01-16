@@ -1,4 +1,8 @@
+
 // Set up the scene, camera, and renderer as global variables.
+// test programm to render some route/traffic information 
+// done by Andreas Herz
+// 
 var scene, camera, renderer, lineMaterial, textMaterial;
 
 init();
