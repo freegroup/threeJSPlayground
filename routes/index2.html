@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="src/_base.css">
+    <script src="data/places.json" type="text/javascript" charset="utf-8"></script>
+    <script src="data/routes.json" type="text/javascript" charset="utf-8"></script>
+
+    <script src="src/three.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="src/Detector.js" type="text/javascript" charset="utf-8"></script>
+    <script src="src/helvetiker_regular.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <!-- postprocessing -->
+    <script src="src/BloomPass.js"></script>
+    <script src="src/EffectComposer.js"></script>
+    <script src="src/RenderPass.js"></script>
+    <script src="src/ShaderPass.js"></script>
+    <script src="src/ShaderExtras.js"></script>
+    <script src="src/MaskPass.js"></script>
+    <script src="src/CopyShader.js"></script>
+    <script src="src/ConvolutionShader.js"></script>
+    <script src="src/FXAAShader.js"></script>
+    <script src="src/OrbitControls.js"></script>
+
+<script>
+function filter() {
+
+    var renderModel = new THREE.RenderPass( scene, camera );
+    var effectBloom = new THREE.BloomPass( 1.3);
+    var effectCopy = new THREE.ShaderPass( THREE.CopyShader );
+    effectFXAA = new THREE.ShaderPass( THREE.FXAAShader );
+    
+    var width = window.innerWidth || 2;
+    var height = window.innerHeight || 2;
+    effectFXAA.uniforms[ 'resolution' ].value.set( 1 / width, 1 / height );
+
+     effectCopy.renderToScreen = true;
+
+     composer = new THREE.EffectComposer( renderer );
+     composer.addPass( renderModel );
+     composer.addPass( effectFXAA );
+     composer.addPass( effectBloom );
+     composer.addPass( effectCopy ); 
+ };
+
+</script>
+  </head>
+  <body style="padding:0px; margin:0px;overflow:hidden">
+  </body>
+  <script src="src/application.js" type="text/javascript" charset="utf-8"></script>
+</html>
